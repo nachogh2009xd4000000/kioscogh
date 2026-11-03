@@ -1,0 +1,8 @@
+[build]
+  publish = "."
+
+# El catálogo siempre fresco: así un cambio desde el panel se ve enseguida.
+[[headers]]
+  for = "/content/*"
+  [headers.values]
+    Cache-Control = "no-cache"

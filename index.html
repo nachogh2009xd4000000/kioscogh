@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>KioscoGH · Impresiones 3D en Olivos</title>
+  <meta name="description" content="Kiosco de productos impresos en 3D en Córdoba 2947, Olivos. Mirá el catálogo, pagá con QR de MercadoPago y retirá en el momento.">
+  <meta name="theme-color" content="#14110f">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="hero__marca">
+      <img src="img/favicon.svg" alt="" width="44" height="44">
+      <span id="nombre">KioscoGH</span>
+    </div>
+    <p class="hero__bajada" id="bajada">Juguetes, fidgets y cositas impresas en 3D, hechas acá mismo.</p>
+    <p class="aviso" id="aviso" hidden></p>
+    <nav class="atajos">
+      <a href="#catalogo">Catálogo</a>
+      <a href="#comprar">Cómo comprar</a>
+      <a href="#donde">Dónde estamos</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="estrella" class="seccion estrella" hidden>
+      <p class="estrella__rotulo">★ Producto estrella</p>
+      <div id="estrella-tarjeta"></div>
+    </section>
+
+    <section id="catalogo" class="seccion">
+      <h2>Catálogo</h2>
+      <div class="filtros" id="filtros" role="tablist" aria-label="Filtrar por categoría"></div>
+      <div class="grilla" id="grilla">
+        <p class="cargando">Cargando productos…</p>
+      </div>
+    </section>
+
+    <section id="comprar" class="seccion">
+      <h2>Cómo comprar</h2>
+      <ol class="pasos">
+        <li><strong>Elegí</strong> lo que te gusta en el catálogo.</li>
+        <li><strong>Pagá</strong> escaneando el QR de MercadoPago que está en el cartel del portón.<span id="alias-linea"></span></li>
+        <li><strong>Avisá</strong> que pagaste: tocá el timbre y mostrá el comprobante.</li>
+        <li><strong>Retirá:</strong> te pasamos el producto por la rendija del portón.</li>
+      </ol>
+    </section>
+
+    <section id="donde" class="seccion">
+      <h2>Dónde estamos</h2>
+      <div class="tarjeta-info">
+        <p class="dato"><span class="icono" aria-hidden="true">📍</span><span><strong id="direccion">Córdoba 2947, entre Pelliza y Borges</strong><br><span id="localidad">Olivos, Vicente López, Buenos Aires</span></span></p>
+        <p class="dato"><span class="icono" aria-hidden="true">🕒</span><span id="horario">Horario a confirmar</span></p>
+        <a class="boton" id="mapa" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=C%C3%B3rdoba%202947%2C%20Olivos%2C%20Buenos%20Aires">Abrir en Google Maps</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <a class="boton boton--ig" id="instagram" target="_blank" rel="noopener" href="https://instagram.com/Ghent3D">Seguinos en Instagram @<span id="ig-usuario">Ghent3D</span></a>
+    <a class="boton boton--wa" id="whatsapp" target="_blank" rel="noopener" hidden>Escribinos por WhatsApp</a>
+    <p>Todo lo que ves está impreso en 3D por Ghent3D.</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

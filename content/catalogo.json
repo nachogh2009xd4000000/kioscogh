@@ -1,0 +1,14 @@
+{
+  "productos": [
+    {
+      "nombre": "Lanzatelarañas",
+      "categoria": "Lanzatelarañas",
+      "precio": 0,
+      "descripcion": "Se ata a la muñeca con correa de velcro y dispara de verdad. Diseño propio de Ghent3D. Siempre disponible en el kiosco.",
+      "foto": "",
+      "disponible": true,
+      "destacado": true,
+      "estrella": true
+    }
+  ]
+}
