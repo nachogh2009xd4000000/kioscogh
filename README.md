@@ -8,3 +8,5 @@ Sitio estático (sin build) en Netlify. Cada push a `main` se publica solo.
 - `qr/`: QR para imprimir (web y MercadoPago).
 
 Los pedidos llegan a Netlify → tu proyecto → **Forms**. Para recibirlos por mail: Project configuration → Notifications → Emails and webhooks → Form submission notifications.
+
+**Importante:** Netlify detecta el formulario recién en el deploy que viene *después* de activar "Enable form detection". Si al enviar un pedido aparece "Page not found", hay que volver a publicar (Deploys → Trigger deploy → Deploy project).
