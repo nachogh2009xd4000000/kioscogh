@@ -1,9 +1,10 @@
-# KioscoGH: web del catálogo
+# KioscoGH: pedidos de impresión 3D
 
-Sitio estático (sin build) publicado en Netlify. Cada push a `main` se publica solo en menos de un minuto.
+Sitio estático (sin build) en Netlify. Cada push a `main` se publica solo.
 
-- `content/catalogo.json`: productos. Campos: `nombre`, `categoria`, `precio` (pesos; 0 = "Consultar"), `descripcion`, `foto` (ruta tipo `/img/productos/archivo.jpg`), `disponible`, `destacado` (etiqueta "Nuevo"), `estrella` (sale arriba en grande; es el lanzatelarañas), `oculto`.
-- `content/kiosco.json`: nombre, frase, aviso destacado, dirección, horario, Instagram, alias de MercadoPago, WhatsApp.
-- `img/productos/`: fotos (cuadradas, comprimidas a ~1200 px).
+- `index.html`: formulario de pedidos (Netlify Forms, con archivo adjunto de hasta 8 MB), medidas de la impresora (Ender 3 V3 SE: 22 × 22 × 25 cm, una sola pieza), cómo pagar con MercadoPago, dirección e Instagram.
+- `gracias.html`: página que ve el cliente después de mandar el pedido.
+- `js/pedido.js`: avisa si la medida no entra en la impresora o si el archivo pesa demasiado.
+- `qr/`: QR para imprimir (web y MercadoPago).
 
-No hay panel de edición: nacho pasa productos y fotos por el proyecto de Claude y Claude actualiza estos archivos.
+Los pedidos llegan a Netlify → tu proyecto → **Forms**. Para recibirlos por mail: Project configuration → Notifications → Emails and webhooks → Form submission notifications.

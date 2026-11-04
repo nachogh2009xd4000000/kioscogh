@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>KioscoGH · Impresiones 3D en Olivos</title>
-  <meta name="description" content="Kiosco de productos impresos en 3D en Córdoba 2947, Olivos. Mirá el catálogo, pagá con QR de MercadoPago y retirá en el momento.">
+  <title>KioscoGH · Pedidos de impresión 3D</title>
+  <meta name="description" content="Pedí tu impresión 3D en KioscoGH, Córdoba 2947, Olivos. Mandá tu idea o tu archivo, te pasamos el precio y lo retirás en el kiosco.">
   <meta name="theme-color" content="#14110f">
   <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/estilos.css">
@@ -13,57 +13,126 @@
   <header class="hero">
     <div class="hero__marca">
       <img src="img/favicon.svg" alt="" width="44" height="44">
-      <span id="nombre">KioscoGH</span>
+      <span>KioscoGH</span>
     </div>
-    <p class="hero__bajada" id="bajada">Juguetes, fidgets y cositas impresas en 3D, hechas acá mismo.</p>
-    <p class="aviso" id="aviso" hidden></p>
+    <h1 class="hero__titulo">Pedí tu impresión 3D</h1>
+    <p class="hero__bajada">Contanos qué querés imprimir, te pasamos el precio y lo retirás acá mismo.</p>
     <nav class="atajos">
-      <a href="#catalogo">Catálogo</a>
-      <a href="#comprar">Cómo comprar</a>
+      <a href="#pedido">Hacer un pedido</a>
+      <a href="#pagar">Pagar</a>
       <a href="#donde">Dónde estamos</a>
     </nav>
   </header>
 
   <main>
-    <section id="estrella" class="seccion estrella" hidden>
-      <p class="estrella__rotulo">★ Producto estrella</p>
-      <div id="estrella-tarjeta"></div>
-    </section>
-
-    <section id="catalogo" class="seccion">
-      <h2>Catálogo</h2>
-      <div class="filtros" id="filtros" role="tablist" aria-label="Filtrar por categoría"></div>
-      <div class="grilla" id="grilla">
-        <p class="cargando">Cargando productos…</p>
+    <section class="seccion">
+      <div class="limites">
+        <h2>Qué podemos imprimir</h2>
+        <p class="limites__maq">Impresora: Creality Ender 3 V3 SE</p>
+        <div class="medidas" aria-label="Medida máxima de la pieza">
+          <div><strong>22 cm</strong><span>de ancho</span></div>
+          <div><strong>22 cm</strong><span>de profundidad</span></div>
+          <div><strong>25 cm</strong><span>de alto</span></div>
+        </div>
+        <p class="limites__nota"><strong>Por ahora imprimimos solo en una pieza.</strong> Si tu objeto es más grande que estas medidas, no lo podemos dividir en partes para pegarlo después.</p>
       </div>
     </section>
 
-    <section id="comprar" class="seccion">
-      <h2>Cómo comprar</h2>
+    <section id="pedido" class="seccion">
+      <h2>Tu pedido</h2>
+      <form class="form" name="pedido" method="POST" action="/gracias.html" enctype="multipart/form-data" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="pedido">
+        <p hidden><label>No completar: <input name="bot-field"></label></p>
+
+        <label class="campo">
+          <span>Tu nombre *</span>
+          <input name="nombre" required autocomplete="name">
+        </label>
+
+        <label class="campo">
+          <span>WhatsApp o mail para contestarte *</span>
+          <input name="contacto" required autocomplete="tel" placeholder="11 1234-5678 o tu@mail.com">
+        </label>
+
+        <label class="campo">
+          <span>¿Qué querés imprimir? *</span>
+          <textarea name="descripcion" rows="4" required placeholder="Ej.: un soporte para el celular, un llavero con mi nombre, una figura que vi en internet…"></textarea>
+        </label>
+
+        <label class="campo">
+          <span>Archivo 3D o foto de referencia (opcional)</span>
+          <input type="file" name="archivo" id="archivo" accept=".stl,.3mf,.obj,image/*">
+          <small>STL, 3MF, OBJ o una foto. Hasta 8 MB.</small>
+          <small class="error" id="archivo-error" hidden>El archivo pesa más de 8 MB. Pegá el link en el campo de abajo.</small>
+        </label>
+
+        <label class="campo">
+          <span>Link del modelo (opcional)</span>
+          <input type="url" name="link" placeholder="https://www.printables.com/…">
+        </label>
+
+        <fieldset class="campo">
+          <legend>Medida aproximada en cm (opcional)</legend>
+          <div class="trio">
+            <label><input type="number" name="ancho" id="ancho" min="0" step="0.1" inputmode="decimal" placeholder="Ancho"></label>
+            <label><input type="number" name="profundidad" id="profundidad" min="0" step="0.1" inputmode="decimal" placeholder="Prof."></label>
+            <label><input type="number" name="alto" id="alto" min="0" step="0.1" inputmode="decimal" placeholder="Alto"></label>
+          </div>
+          <small class="error" id="medida-error" hidden>Eso pasa el tamaño máximo (22 × 22 × 25 cm). Como por ahora imprimimos solo en una pieza, habría que achicarlo.</small>
+        </fieldset>
+
+        <div class="dos">
+          <label class="campo">
+            <span>Color</span>
+            <input name="color" placeholder="El que quieras">
+          </label>
+          <label class="campo">
+            <span>Cantidad</span>
+            <input type="number" name="cantidad" min="1" value="1" inputmode="numeric">
+          </label>
+        </div>
+
+        <label class="campo">
+          <span>¿Para cuándo lo necesitás?</span>
+          <input name="fecha" placeholder="Sin apuro / para el sábado…">
+        </label>
+
+        <button class="boton" type="submit" id="enviar">Enviar pedido</button>
+        <p class="nota">No pagás nada todavía: primero te escribimos con el precio y el tiempo de impresión.</p>
+      </form>
+    </section>
+
+    <section id="pagar" class="seccion">
+      <h2>Cómo funciona</h2>
       <ol class="pasos">
-        <li><strong>Elegí</strong> lo que te gusta en el catálogo.</li>
-        <li><strong>Pagá</strong> escaneando el QR de MercadoPago que está en el cartel del portón.<span id="alias-linea"></span></li>
-        <li><strong>Avisá</strong> que pagaste: tocá el timbre y mostrá el comprobante.</li>
-        <li><strong>Retirá:</strong> te pasamos el producto por la rendija del portón.</li>
+        <li><strong>Mandás el pedido</strong> con este formulario.</li>
+        <li><strong>Te pasamos el precio</strong> por WhatsApp o mail.</li>
+        <li><strong>Pagás con MercadoPago</strong> escaneando el QR de acá abajo o el del cartel del portón.</li>
+        <li><strong>Lo retirás</strong> en el kiosco: te lo pasamos por la rendija del portón.</li>
       </ol>
+      <div class="pago" id="pago">
+        <!-- QR_MERCADOPAGO -->
+        <p class="pago__pendiente">También podés transferir al alias</p>
+        <p class="alias"><strong id="alias">nachogentile23</strong></p>
+        <button type="button" class="boton boton--copiar" id="copiar-alias">Copiar alias</button>
+      </div>
     </section>
 
     <section id="donde" class="seccion">
       <h2>Dónde estamos</h2>
       <div class="tarjeta-info">
-        <p class="dato"><span class="icono" aria-hidden="true">📍</span><span><strong id="direccion">Córdoba 2947, entre Pelliza y Borges</strong><br><span id="localidad">Olivos, Vicente López, Buenos Aires</span></span></p>
-        <p class="dato"><span class="icono" aria-hidden="true">🕒</span><span id="horario">Horario a confirmar</span></p>
-        <a class="boton" id="mapa" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=C%C3%B3rdoba%202947%2C%20Olivos%2C%20Buenos%20Aires">Abrir en Google Maps</a>
+        <p class="dato"><span class="icono" aria-hidden="true">📍</span><span><strong>Córdoba 2947, entre Pelliza y Borges</strong><br>Olivos, Vicente López, Buenos Aires</span></p>
+        <p class="dato"><span class="icono" aria-hidden="true">🕒</span><span>Horario a confirmar</span></p>
+        <a class="boton" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=C%C3%B3rdoba%202947%2C%20Olivos%2C%20Buenos%20Aires">Abrir en Google Maps</a>
       </div>
     </section>
   </main>
 
   <footer class="pie">
-    <a class="boton boton--ig" id="instagram" target="_blank" rel="noopener" href="https://instagram.com/Ghent3D">Seguinos en Instagram @<span id="ig-usuario">Ghent3D</span></a>
-    <a class="boton boton--wa" id="whatsapp" target="_blank" rel="noopener" hidden>Escribinos por WhatsApp</a>
-    <p>Todo lo que ves está impreso en 3D por Ghent3D.</p>
+    <a class="boton boton--ig" target="_blank" rel="noopener" href="https://instagram.com/Ghent3D">Seguinos en Instagram @Ghent3D</a>
+    <p>Impresiones 3D hechas en Olivos por Ghent3D.</p>
   </footer>
 
-  <script src="js/app.js"></script>
+  <script src="js/pedido.js"></script>
 </body>
 </html>
